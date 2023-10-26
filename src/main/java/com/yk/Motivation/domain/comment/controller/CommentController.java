@@ -19,6 +19,6 @@ public class CommentController {
     @PostMapping("/write")
     public String write(@ModelAttribute Comment comment) {
         commentService.save(comment);
-        return "redirect:/usr/article/free1/detail/" + comment.getArticleId();  // 댓글을 단 게시글로 리다이렉트
+        return "redirect:/usr/article/free1/detail/" + comment.getArticle().getId();  // 댓글을 단 게시글로 리다이렉트
     }
 }
