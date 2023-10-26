@@ -144,8 +144,8 @@
                             <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
                             <div th:if="${@rq.login}">
                                 <div th:if="${@rq.member.nickname} == ${comment.nickName}">
-                                    <a th:href="|/comment/edit/${comment.id}|" class="btn btn-primary">수정</a>
-                                    <a th:href="|/comment/remove/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
+                                    <a th:href="|/usr/comment/modify/${comment.id}|" class="btn btn-primary">수정</a>
+                                    <a th:href="|/usr/comment/delete/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
                                 </div>
                             </div>
                         </li>
