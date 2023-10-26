@@ -141,6 +141,13 @@
                                 <input type="radio" disabled="true" th:checked="${comment.rating == 1}">
                                 <label>★</label>
                             </div>
+                            <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
+                            <div th:if="${@rq.login}">
+                                <div th:if="${@rq.member.nickname} == ${comment.nickName}">
+                                    <a th:href="|/usr/comment/modify/${comment.id}|" class="btn btn-link">수정</a>
+                                    <a onclick="return confirm('정말로 삭제하시겠습니까?');" th:href="|/usr/comment/remove/${comment.id}|" class="btn btn-link">삭제</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -150,7 +157,7 @@
                     <label class="label">
                         <span class="label-text">댓글 작성하기</span>
                     </label>
-                    <!--로그인 상태 확인 -> 로그인 상태만 작성 가능-->
+                    <!--로그인 상태 확인 / 로그인 상태만 작성 가능-->
                     <div th:if="${@rq.login}">
                         <form th:action="@{/usr/comment/write}" method="post">
                             <input type="hidden" th:value="${@rq.member.nickname}" name="nickName" />
