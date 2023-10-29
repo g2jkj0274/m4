@@ -143,7 +143,14 @@
                         <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
                         <div th:if="${@rq.login}">
                             <div th:if="${@rq.member.nickname} == ${comment.nickName}">
-                                <a th:href="|/usr/comment/modify/${comment.id}|" class="btn btn-warning">수정</a>
+                                <textarea class="textarea textarea-bordered w-full" name="content" placeholder="댓글 수정" style="display: none;"></textarea>
+                                <a class="btn btn-warning" onclick="showTextarea()">수정</a>
+                                <script>
+                                    function showTextarea() {
+                                        var textarea = document.querySelector('.textarea');
+                                        textarea.style.display = 'block';
+                                    }
+                                </script>
                                 <a th:href="|/usr/comment/delete/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제 하시겠습니까?');">삭제</a>
                             </div>
                         </div>
