@@ -148,7 +148,12 @@
                                 <script>
                                     function showTextarea() {
                                         var textarea = document.querySelector('.textarea');
-                                        textarea.style.display = 'block';
+
+                                        if(textarea.style.display === 'none' || textarea.style.display === '') {
+                                            textarea.style.display = 'block';
+                                        } else {
+                                            textarea.style.display = 'none';
+                                        }
                                     }
                                 </script>
                                 <a th:href="|/usr/comment/delete/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제 하시겠습니까?');">삭제</a>
