@@ -123,34 +123,32 @@
                 </h1>
 
                 <!-- 댓글 리스트 -->
-                <div>
-                    <span>댓글 리스트</span>
-                    <ul th:each="comment : ${comments}">
-                        <li>
-                            <strong th:text="${comment.nickName}"></strong> <!-- 작성자의 nickName 출력 -->
-                            <p th:text="${comment.content}"></p>
-                            <div class="rating">
-                                <input type="radio" disabled="true" th:checked="${comment.rating == 5}">
-                                <label>★</label>
-                                <input type="radio" disabled="true" th:checked="${comment.rating == 4}">
-                                <label>★</label>
-                                <input type="radio" disabled="true" th:checked="${comment.rating == 3}">
-                                <label>★</label>
-                                <input type="radio" disabled="true" th:checked="${comment.rating == 2}">
-                                <label>★</label>
-                                <input type="radio" disabled="true" th:checked="${comment.rating == 1}">
-                                <label>★</label>
+                <span>댓글 리스트</span>
+                <ul th:each="comment : ${comments}">
+                    <li>
+                        <strong th:text="${comment.nickName}"></strong> <!-- 작성자의 nickName 출력 -->
+                        <p id="comment-content-${comment.id}" th:text="${comment.content}"></p>
+                        <div class="rating">
+                            <input type="radio" disabled="true" th:checked="${comment.rating == 5}">
+                            <label>★</label>
+                            <input type="radio" disabled="true" th:checked="${comment.rating == 4}">
+                            <label>★</label>
+                            <input type="radio" disabled="true" th:checked="${comment.rating == 3}">
+                            <label>★</label>
+                            <input type="radio" disabled="true" th:checked="${comment.rating == 2}">
+                            <label>★</label>
+                            <input type="radio" disabled="true" th:checked="${comment.rating == 1}">
+                            <label>★</label>
+                        </div>
+                        <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
+                        <div th:if="${@rq.login}">
+                            <div th:if="${@rq.member.nickname} == ${comment.nickName}">
+                                <a th:href="|/usr/comment/modify/${comment.id}|" class="btn btn-warning">수정</a>
+                                <a th:href="|/usr/comment/delete/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제 하시겠습니까?');">삭제</a>
                             </div>
-                            <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
-                            <div th:if="${@rq.login}">
-                                <div th:if="${@rq.member.nickname} == ${comment.nickName}">
-                                    <a th:href="|/usr/comment/modify/${comment.id}|" class="btn btn-primary">수정</a>
-                                    <a th:href="|/usr/comment/delete/${comment.id}|" class="btn btn-danger" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
 
                 <!-- 댓글 작성 폼 -->
                 <div class="form-control col-span-full">

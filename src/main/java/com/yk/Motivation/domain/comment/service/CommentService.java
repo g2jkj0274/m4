@@ -20,16 +20,6 @@ public class CommentService {
         return commentRepository.findByArticleId(id);
     }
 
-    // 댓글 수정
-    public void updateComment(long commentId, Comment comment) {
-        Comment existingComment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
-
-        existingComment.setContent(comment.getContent());
-        existingComment.setRating(comment.getRating());
-        commentRepository.save(existingComment);
-    }
-
     // 댓글 삭제
     public void delete(long commentId) {
         Comment comment = commentRepository.findById(commentId)
@@ -41,5 +31,11 @@ public class CommentService {
     public Comment findById(long commentId) {
         return commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다."));
+    }
+
+    public Comment modify(Comment comment) {
+        Comment existingComment = findById(comment.getId());
+        existingComment.setContent(comment.getContent());
+        return commentRepository.save(existingComment);
     }
 }
