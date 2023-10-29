@@ -144,8 +144,12 @@
                         <div th:if="${@rq.login}">
                             <div th:if="${@rq.member.nickname} == ${comment.nickName}">
                                 <div class="comment-modify" style="display: none;">
-                                    <textarea class="textarea textarea-bordered w-full" name="content"
-                                        th:attr="placeholder=${comment.content}"></textarea>
+                                    <form action="@{/usr/comment/modify}" method="post">
+                                        <textarea class="textarea textarea-bordered w-full" name="content"
+                                            th:attr="placeholder=${comment.content}"></textarea>
+                                        <input type="hidden" name="commentId" th:value="${comment.id}"/> <!-- 댓글 ID도 서버로 전송 -->
+                                        <button type="submit" class="btn btn-success">수정 완료</button>
+                                    </form>
                                 </div>
                                 <a class="btn btn-warning" onclick="toggleCommentModify()">수정</a>
                                 <script>

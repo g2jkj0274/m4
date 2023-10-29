@@ -28,4 +28,14 @@ public class CommentController {
         commentService.delete(commentId);
         return "redirect:/usr/article/free1/detail/" + articleId;
     }
+
+    @PostMapping("/modify")
+    public String modify(@RequestParam String content, @RequestParam Long commentId) {
+        Comment comment = commentService.findById(commentId);
+
+        comment.setContent(content);
+        commentService.save(comment); // 댓글의 내용을 수정하고 다시 저장
+
+        return "redirect:/usr/article/free1/detail/" + comment.getArticle().getId(); // 수정한 댓글이 있는 게시글로 리다이렉트
+    }
 }
