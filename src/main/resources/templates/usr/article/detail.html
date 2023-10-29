@@ -143,17 +143,19 @@
                         <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
                         <div th:if="${@rq.login}">
                             <div th:if="${@rq.member.nickname} == ${comment.nickName}">
-                                <textarea class="textarea textarea-bordered w-full" name="content"
-                                          th:attr="placeholder=${comment.content}" style="display: none;"></textarea>
-                                <a class="btn btn-warning" onclick="showTextarea()">수정</a>
+                                <div class="comment-modify" style="display: none;">
+                                    <textarea class="textarea textarea-bordered w-full" name="content"
+                                        th:attr="placeholder=${comment.content}"></textarea>
+                                </div>
+                                <a class="btn btn-warning" onclick="toggleCommentModify()">수정</a>
                                 <script>
-                                    function showTextarea() {
-                                        var textarea = document.querySelector('.textarea');
+                                    function toggleCommentModify() {
+                                        var commentModifyDiv = document.querySelector('.comment-modify');
 
-                                        if(textarea.style.display === 'none' || textarea.style.display === '') {
-                                            textarea.style.display = 'block';
+                                        if(commentModifyDiv.style.display === 'none' || commentModifyDiv.style.display === '') {
+                                            commentModifyDiv.style.display = 'block';
                                         } else {
-                                            textarea.style.display = 'none';
+                                            commentModifyDiv.style.display = 'none';
                                         }
                                     }
                                 </script>
