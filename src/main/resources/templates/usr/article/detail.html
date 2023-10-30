@@ -143,19 +143,19 @@
                         <!-- 로그인된 사용자가 이 댓글의 작성자인 경우 수정 및 삭제 버튼 표시 -->
                         <div th:if="${@rq.login}">
                             <div th:if="${@rq.member.nickname} == ${comment.nickName}">
-                                <div class="comment-modify" style="display: none;">
+                                <div th:id="'comment-modify-' + ${comment.id}" class="comment-modify" style="display: none;">
                                     <form th:action="@{/usr/comment/modify}" method="post">
                                         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                                         <textarea class="textarea textarea-bordered w-full" name="content"
-                                            th:attr="placeholder=${comment.content}"></textarea>
+                                                  th:attr="placeholder=${comment.content}"></textarea>
                                         <input type="hidden" name="commentId" th:value="${comment.id}"/> <!-- 댓글 ID도 서버로 전송 -->
                                         <button type="submit" class="btn btn-success">수정 완료</button>
                                     </form>
                                 </div>
-                                <a class="btn btn-warning" onclick="toggleCommentModify()">수정</a>
+                                <a class="btn btn-warning" th:onclick="'toggleCommentModify(' + ${comment.id} + ');'">수정</a>
                                 <script>
-                                    function toggleCommentModify() {
-                                        var commentModifyDiv = document.querySelector('.comment-modify');
+                                    function toggleCommentModify(commentId) {
+                                        var commentModifyDiv = document.querySelector('#comment-modify-' + commentId);
 
                                         if(commentModifyDiv.style.display === 'none' || commentModifyDiv.style.display === '') {
                                             commentModifyDiv.style.display = 'block';
