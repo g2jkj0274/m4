@@ -144,7 +144,8 @@
                         <div th:if="${@rq.login}">
                             <div th:if="${@rq.member.nickname} == ${comment.nickName}">
                                 <div class="comment-modify" style="display: none;">
-                                    <form action="@{/usr/comment/modify}" method="post">
+                                    <form th:action="@{/usr/comment/modify}" method="post">
+                                        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                                         <textarea class="textarea textarea-bordered w-full" name="content"
                                             th:attr="placeholder=${comment.content}"></textarea>
                                         <input type="hidden" name="commentId" th:value="${comment.id}"/> <!-- 댓글 ID도 서버로 전송 -->
