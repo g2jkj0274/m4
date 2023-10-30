@@ -117,7 +117,7 @@ public class MemberService {
     // 중복 닉네임이면 # 붙이고 3자리 번호 부여
     // 설마 그럴 일 없겠지만... 10번의 시도가 모두 중복 닉네임일 경우, 4자리로 업그레이드
     // 를 반복.
-    private String getUniqueNicknameIfNeed(String nickname) { 
+    private String getUniqueNicknameIfNeed(String nickname) {
         int appenderStrBaseLen = 3;
         int appenderStrAddiLen;
         String appendStr = "";
