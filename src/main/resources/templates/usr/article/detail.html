@@ -109,7 +109,7 @@
                             <input type="hidden" th:value="${article.id}" name="article" />
                             <button type="submit" class="recommend btn btn-sm btn-outline-secondary">
                                 추천
-                                <span class="badge rounded-pill bg-success">0</span>
+                                <span th:text="${article.voteCount}" class="badge rounded-pill bg-success"></span>
                             </button>
                         </form>
 
