@@ -63,13 +63,6 @@
 
                     <div class="form-control col-span-full">
                         <label class="label">
-                            <span class="label-text">제목</span>
-                        </label>
-                        <div th:text="${article.subject}"></div>
-                    </div>
-
-                    <div class="form-control col-span-full">
-                        <label class="label">
                             <span class="label-text">태그</span>
                         </label>
                         <div th:utext="${article.getTagLinks('<a class=`link` href=`%s`>#%s</a>', '/usr/article/listByTag/%s')}"></div>
@@ -148,6 +141,19 @@
                                         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                                         <textarea class="textarea textarea-bordered w-full" name="content"
                                                   th:attr="placeholder=${comment.content}"></textarea>
+                                        <div class="rating">
+                                            <span>별점:</span>
+                                            <input type="radio" name="rating" value="5" id="edit-star5-${comment.id}" th:checked="${comment.rating == 5}">
+                                            <label for="edit-star5-${comment.id}">★</label>
+                                            <input type="radio" name="rating" value="4" id="edit-star4-${comment.id}" th:checked="${comment.rating == 4}">
+                                            <label for="edit-star4-${comment.id}">★</label>
+                                            <input type="radio" name="rating" value="3" id="edit-star3-${comment.id}" th:checked="${comment.rating == 3}">
+                                            <label for="edit-star3-${comment.id}">★</label>
+                                            <input type="radio" name="rating" value="2" id="edit-star2-${comment.id}" th:checked="${comment.rating == 2}">
+                                            <label for="edit-star2-${comment.id}">★</label>
+                                            <input type="radio" name="rating" value="1" id="edit-star1-${comment.id}" th:checked="${comment.rating == 1}">
+                                            <label for="edit-star1-${comment.id}">★</label>
+                                        </div>
                                         <input type="hidden" name="commentId" th:value="${comment.id}"/> <!-- 댓글 ID도 서버로 전송 -->
                                         <button type="submit" class="btn btn-success">수정 완료</button>
                                     </form>

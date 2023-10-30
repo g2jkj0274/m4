@@ -28,10 +28,18 @@ public class CommentController {
         commentService.delete(commentId);
         return "redirect:/usr/article/free1/detail/" + articleId;
     }
+/*
 
     @PostMapping("/modify")
     public String modify(@RequestParam long commentId, @RequestParam String content) {
         Comment updatedComment = commentService.updateComment(commentId, content);
+        return "redirect:/usr/article/free1/detail/" + updatedComment.getArticle().getId();
+    }
+*/
+
+    @PostMapping("/modify")
+    public String modify(@RequestParam long commentId, @RequestParam String content, @RequestParam int rating) {
+        Comment updatedComment = commentService.updateComment(commentId, content, rating);
         return "redirect:/usr/article/free1/detail/" + updatedComment.getArticle().getId();
     }
 }
