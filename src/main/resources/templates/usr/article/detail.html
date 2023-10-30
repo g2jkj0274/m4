@@ -104,10 +104,10 @@
                         <a class="btn btn-link" th:href="|/usr/article/${board.code}/list|">목록</a>
 
                         <!--JHG ADD - vote-->
-                        <form th:action="@{/usr/vote/add}" method="post" onsubmit="return confirmVote();">
+                        <form th:action="@{/usr/vote/add}" method="post" onsubmit="return confirmVote(this);">
                             <input type="hidden" th:value="${@rq.member.nickname}" name="nickName" />
                             <input type="hidden" th:value="${article.id}" name="article" />
-                            <button type="submit" class="recommend btn btn-sm btn-outline-secondary">
+                            <button type="submit" class="recommend btn btn-sm btn-outline-secondary" data-voted="false">
                                 추천
                                 <span th:text="${article.voteCount}" class="badge rounded-pill bg-success"></span>
                             </button>
@@ -123,8 +123,7 @@
                 </div>
             </div>
 
-            <!-- 댓글 작업 진행 -->
-            <span>----- 댓글 작업 진행 시작 선 -----</span>
+            <!-- JHG ADD - comment -->
             <div class="card-body" th:if="${board.name} == '자유'">
                 <!--아이콘 영역-->
                 <h1 class="mb-4">
@@ -227,7 +226,7 @@
                     </div>
                 </div>
             </div>
-            <span>----- 댓글 작업 진행 끝 선 -----</span>
+            <!-- JHG ADD - comment -->
         </div>
     </div>
 

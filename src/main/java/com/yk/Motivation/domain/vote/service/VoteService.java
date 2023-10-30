@@ -21,4 +21,22 @@ public class VoteService {
         article.setVoteCount(article.getVoteCount() + 1);
         return voteRepository.save(vote);
     }
+
+    public boolean hasAlreadyVoted(String nickName, Long articleId) {
+        return voteRepository.existsByNickNameAndArticleId(nickName, articleId);
+    }
+
+    @Transactional
+    public void cancelVote(String nickName, Long articleId) {
+        Vote vote = voteRepository.findByNickNameAndArticleId(nickName, articleId)
+                .orElseThrow(() -> new IllegalArgumentException("Vote not found"));
+
+        voteRepository.delete(vote);
+
+        // Article의 voteCount 감소
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid article ID"));
+        article.setVoteCount(article.getVoteCount() - 1);
+    }
+
 }

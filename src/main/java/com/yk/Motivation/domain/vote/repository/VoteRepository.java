@@ -2,7 +2,12 @@ package com.yk.Motivation.domain.vote.repository;
 
 import com.yk.Motivation.domain.vote.entity.Vote;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+@Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
-    // 필요한 쿼리 메서드 추가 가능
+    boolean existsByNickNameAndArticleId(String nickName, Long articleId);
+    Optional<Vote> findByNickNameAndArticleId(String nickName, Long articleId);
 }
