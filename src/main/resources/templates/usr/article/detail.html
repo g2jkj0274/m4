@@ -102,6 +102,23 @@
                            class="btn btn-link"
                            th:href="|/usr/article/${board.code}/remove/${article.id}|" method="POST">삭제</a>
                         <a class="btn btn-link" th:href="|/usr/article/${board.code}/list|">목록</a>
+
+                        <!--JHG ADD - vote-->
+                        <form th:action="@{/usr/vote/add}" method="post" onsubmit="return confirmVote();">
+                            <input type="hidden" th:value="${@rq.member.nickname}" name="nickName" />
+                            <input type="hidden" th:value="${article.id}" name="article" />
+                            <button type="submit" class="recommend btn btn-sm btn-outline-secondary">
+                                추천
+                                <span class="badge rounded-pill bg-success">0</span>
+                            </button>
+                        </form>
+
+                        <script>
+                            function confirmVote() {
+                                return confirm("게시물을 추천 하시겠습니까?");
+                            }
+                        </script>
+                        <!--JHG ADD - vote-->
                     </div>
                 </div>
             </div>
