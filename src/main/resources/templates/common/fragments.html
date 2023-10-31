@@ -641,6 +641,18 @@
                 <div th:if="${board.name} == '자유'">
                     <div class="form-control">
                         <label class="label">
+                            <span class="label-text">좋아요</span>
+                        </label>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-thumbs-up mr-2"></i>
+                            <div th:text="${article.voteCount}"></div>        <!--이 부분을 댓글 개수로 바꿔야 함-->
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${board.name} == '자유'">
+                    <div class="form-control">
+                        <label class="label">
                             <span class="label-text">조회수</span>
                         </label>
                         <div class="flex items-center">
