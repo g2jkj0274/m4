@@ -201,6 +201,10 @@ public class ArticleController {
         Board board = boardService.findByCode(boardCode).get();
         Article article = articleService.findById(id).get();
 
+        // 조회수 증가
+        article.setViewCount(article.getViewCount() + 1);
+        articleService.save(article); // 증가된 조회수를 저장
+
         // 댓글 리스트 가져오기
         List<Comment> comments = commentService.findByArticleId(id);
 

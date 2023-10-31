@@ -64,6 +64,10 @@ public class Article extends BaseEntity implements DocumentHavingTags {
         return tag;
     }
 
+    /*JHG ADD*/
     // 추천 수
     private int voteCount = 0; // 초기 값 0
+
+    // 조회 수
+    private int viewCount = 0;
 }
