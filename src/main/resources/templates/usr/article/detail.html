@@ -104,19 +104,28 @@
                         <a class="btn btn-link" th:href="|/usr/article/${board.code}/list|">목록</a>
 
                         <!--JHG ADD - vote-->
-                        <form th:action="@{/usr/vote/add}" method="post" onsubmit="return confirmVote(this);">
-                            <input type="hidden" th:value="${@rq.member.nickname}" name="nickName" />
+                        <form th:action="@{/usr/vote/add}" method="post" onsubmit="return confirmVote();">
+                            <input type="hidden" th:if="${@rq.member != null}" th:value="${@rq.member.nickname}" name="nickName" />
                             <input type="hidden" th:value="${article.id}" name="article" />
-                            <button type="submit" class="recommend btn btn-sm btn-outline-secondary" data-voted="false">
-                                추천
-                                <span th:text="${article.voteCount}" class="badge rounded-pill bg-success"></span>
-                            </button>
-                        </form>
 
+                            <div th:if="${@rq.login}">
+                                <!-- 로그인한 사용자에게만 추천 버튼 보여주기 -->
+                                <button type="submit" class="recommend btn btn-sm btn-outline-secondary">추천
+                                    <span th:text="${article.voteCount}" class="badge rounded-pill bg-success"></span>
+                                </button>
+                            </div>
+
+                            <div th:unless="${@rq.login}">
+                                <!-- 비로그인 사용자에게는 추천 수만 보여주기 -->
+                                <a href="#" class="recommend btn btn-sm btn-outline-secondary">추천
+                                    <span class="badge rounded-pill bg-success" th:text="${article.voteCount}"></span>
+                                </a>
+                            </div>
+                        </form>
                         <script>
                             function confirmVote() {
-                                return confirm("게시물을 추천 하시겠습니까?");
-                            }
+                                   return confirm("게시물을 추천 하시겠습니까?");
+                               }
                         </script>
                         <!--JHG ADD - vote-->
                     </div>
