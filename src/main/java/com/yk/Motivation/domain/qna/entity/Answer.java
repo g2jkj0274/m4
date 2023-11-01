@@ -14,7 +14,6 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)  // Lombok: toString 메서드 오버라이드
 public class Answer extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
     private Question question;  // 해당 답변과 관련된 질문
 
     @Column(nullable = false, columnDefinition = "TEXT")

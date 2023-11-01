@@ -5,9 +5,7 @@ import com.yk.Motivation.domain.qna.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +28,23 @@ public class QuestionController {
         Question question = this.questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "usr/qna/detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "usr/qna/create";
+    }
+
+    @PostMapping("/create")
+    public String create(
+            @RequestParam("subject") String subject,
+            @RequestParam("content") String content,
+            @RequestParam("memberId") Long memberId) {
+
+        // 질문을 생성하는 서비스 호출
+        questionService.create(subject, content, memberId);
+
+        // 생성 후 질문 목록 페이지로 리다이렉트
+        return "redirect:/usr/qna/q/list";
     }
 }

@@ -1,5 +1,7 @@
 package com.yk.Motivation.domain.qna.service;
 
+import com.yk.Motivation.domain.member.entity.Member;
+import com.yk.Motivation.domain.member.repository.MemberRepository;
 import com.yk.Motivation.domain.qna.entity.Question;
 import com.yk.Motivation.domain.qna.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.Optional;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final MemberRepository memberRepository;
 
     public List<Question> getList() {
         return this.questionRepository.findAll();
@@ -22,5 +25,19 @@ public class QuestionService {
         Optional<Question> question = this.questionRepository.findById(id);
         question.isPresent();
         return question.get();
+    }
+
+    public void create(String subject, String content, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
+
+        Question q = new Question();
+        q.setSubject(subject);
+        q.setContent(content);
+        q.setLectureId(1);        // 고정된 값 1로 설정
+        q.setCurriculumId(1);     // 고정된 값 1로 설정
+        q.setMember(member);
+
+        this.questionRepository.save(q);
     }
 }
