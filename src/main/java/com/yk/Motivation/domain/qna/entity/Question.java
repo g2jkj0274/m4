@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity  // JPA Entity로 선언
@@ -22,7 +24,7 @@ public class Question extends BaseEntity {
     private int curriculumId;  // 커리큘럼 ID
 
     @Column(nullable = false, length = 255)
-    private String title;  // 질문 제목
+    private String subject;  // 질문 제목
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;  // 질문 내용
@@ -33,5 +35,8 @@ public class Question extends BaseEntity {
 
     @Column(nullable = false)
     private boolean answerStatus = false;  // 답변 상태. 기본값은 false(미등록).
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answerList;
 
 }
